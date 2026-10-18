@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#003366">
+<title>BMA4000-20 | Session 16 | PESTLE Market Entry Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bsu-navy: #003366;
+  --bsu-navy-dark: #001a33;
+  --bsu-navy-light: #1a4d80;
+  --bsu-gold: #c8a415;
+  --bsu-gold-light: #e0be3a;
+  --bsu-gold-dark: #8B6914;
+  --signal-strong: #10b981;
+  --signal-moderate: #f59e0b;
+  --signal-weak: #ef4444;
+  --positive: #10b981;
+  --negative: #ef4444;
+  --bg-primary: #0a1628;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-solid: #0f2440;
+  --bg-elevated: rgba(255, 255, 255, 0.07);
+  --bg-input: rgba(255, 255, 255, 0.05);
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-gold: rgba(200, 164, 21, 0.4);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --radius: 16px;
+  --radius-lg: 24px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+[data-theme="light"] {
+  --bg-primary: #f4f7fc;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-solid: #ffffff;
+  --bg-elevated: rgba(255, 255, 255, 0.95);
+  --bg-input: #ffffff;
+  --text-primary: #0a1628;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --border: rgba(0, 51, 102, 0.12);
+  --border-strong: rgba(0, 51, 102, 0.25);
+  --border-gold: rgba(200, 164, 21, 0.5);
+  --shadow-sm: 0 2px 8px rgba(0, 51, 102, 0.08);
+  --shadow: 0 8px 30px rgba(0, 51, 102, 0.12);
+  --shadow-lg: 0 20px 60px rgba(0, 51, 102, 0.18);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.65;
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(0, 51, 102, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(200, 164, 21, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(26, 77, 128, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(0, 51, 102, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(200, 164, 21, 0.08) 0%, transparent 60%);
+}
+.container { max-width: 950px; width: 100%; margin: 0 auto; position: relative; z-index: 1; }
+.top-controls { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 18px; }
+.top-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition);
+  backdrop-filter: blur(12px);
+  min-height: 40px;
+}
+.top-btn:hover { border-color: var(--bsu-gold); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.header { text-align: center; margin-bottom: 26px; }
+.module-badge {
+  display: inline-block;
+  background: rgba(200, 164, 21, 0.12);
+  border: 1px solid var(--border-gold);
+  color: var(--bsu-gold-light);
+  padding: 6px 18px;
+  border-radius: 24px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+h1 {
+  font-size: clamp(26px, 5vw, 40px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--bsu-gold-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+[data-theme="light"] h1 {
+  background: linear-gradient(135deg, var(--bsu-navy) 0%, var(--bsu-gold-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.tagline { font-size: clamp(14px, 2vw, 16px); color: var(--text-secondary); max-width: 680px; margin: 0 auto; line-height: 1.6; }
+.intro-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 26px;
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.intro-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--bsu-navy), var(--bsu-gold), var(--signal-strong));
+}
+.intro-panel h2 { font-size: 17px; font-weight: 800; color: var(--text-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.intro-panel p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; }
+.intro-panel p:last-child { margin-bottom: 0; }
+.intro-panel strong { color: var(--bsu-gold-light); font-weight: 700; }
+.intro-panel .legend {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.legend-item { font-size: 12.5px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.legend-dot.strong { background: var(--signal-strong); }
+.legend-dot.moderate { background: var(--signal-moderate); }
+.legend-dot.weak { background: var(--signal-weak); }
+.status-bar {
+  position: sticky;
+  top: 12px;
+  z-index: 100;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+.status-item { font-size: 13px; font-weight: 700; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+.status-item strong { color: var(--bsu-gold-light); font-family: var(--font-mono); font-size: 14px; }
+.status-item.score strong { color: var(--signal-strong); }
+.progress-dots { display: flex; gap: 6px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+.progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all var(--transition);
+}
+.progress-dot.correct { background: var(--positive); }
+.progress-dot.incorrect { background: var(--negative); }
+.progress-dot.investigate { background: var(--signal-moderate); }
+.progress-dot.current {
+  background: var(--bsu-gold);
+  transform: scale(1.4);
+  box-shadow: 0 0 10px rgba(200, 164, 21, 0.6);
+}
+.round-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px;
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.5s ease;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.round-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--bsu-navy), var(--bsu-gold));
+}
+.round-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+.round-badge {
+  background: linear-gradient(135deg, var(--bsu-navy), var(--bsu-navy-light));
+  color: white;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--bsu-gold);
+  flex-shrink: 0;
+}
+.round-title-wrap { flex: 1; min-width: 200px; }
+.round-title { font-size: clamp(18px, 3vw, 22px); font-weight: 800; color: var(--text-primary); line-height: 1.3; margin-bottom: 4px; }
+.round-context { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.signal-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 18px 0 22px; }
+.signal-card {
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: all var(--transition);
+}
+.signal-card:hover { border-color: var(--border-strong); transform: translateX(3px); }
+.signal-card.positive { border-left: 4px solid var(--positive); }
+.signal-card.negative { border-left: 4px solid var(--negative); }
+.signal-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.signal-body { flex: 1; min-width: 0; }
+.signal-pillar { font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bsu-gold-light); margin-bottom: 2px; }
+.signal-text { font-size: 14px; font-weight: 600; color: var(--text-primary); line-height: 1.5; }
+.signal-strength {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+}
+.signal-strength.strong { background: rgba(16, 185, 129, 0.15); color: var(--signal-strong); border: 1px solid rgba(16, 185, 129, 0.4); }
+.signal-strength.moderate { background: rgba(245, 158, 11, 0.15); color: var(--signal-moderate); border: 1px solid rgba(245, 158, 11, 0.4); }
+.signal-strength.weak { background: rgba(239, 68, 68, 0.15); color: var(--signal-weak); border: 1px solid rgba(239, 68, 68, 0.4); }
+.signal-strength .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.decision-title { font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--bsu-gold-light); margin-bottom: 12px; text-align: center; }
+.decision-buttons { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 640px) { .decision-buttons { grid-template-columns: 1fr 1fr 1fr; } }
+.decision-btn {
+  padding: 18px 16px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--bg-input);
+  cursor: pointer;
+  font-family: var(--font);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition);
+  min-height: 100px;
+  justify-content: center;
+}
+.decision-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: var(--shadow); }
+.decision-btn:disabled { cursor: not-allowed; opacity: 0.5; }
+.decision-btn .btn-icon { font-size: 28px; }
+.decision-btn .btn-label { font-size: 14px; font-weight: 800; color: var(--text-primary); text-align: center; line-height: 1.3; }
+.decision-btn.enter { border-color: rgba(16, 185, 129, 0.5); }
+.decision-btn.enter:hover:not(:disabled) { border-color: var(--positive); background: rgba(16, 185, 129, 0.1); }
+.decision-btn.investigate { border-color: rgba(245, 158, 11, 0.5); }
+.decision-btn.investigate:hover:not(:disabled) { border-color: var(--signal-moderate); background: rgba(245, 158, 11, 0.1); }
+.decision-btn.exit { border-color: rgba(239, 68, 68, 0.5); }
+.decision-btn.exit:hover:not(:disabled) { border-color: var(--negative); background: rgba(239, 68, 68, 0.1); }
+.decision-btn.selected { transform: translateY(-3px) scale(1.02); box-shadow: var(--shadow); }
+.decision-btn.selected.enter { border-color: var(--positive); background: rgba(16, 185, 129, 0.2); }
+.decision-btn.selected.investigate { border-color: var(--signal-moderate); background: rgba(245, 158, 11, 0.2); }
+.decision-btn.selected.exit { border-color: var(--negative); background: rgba(239, 68, 68, 0.2); }
+.feedback-panel {
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-top: 20px;
+  display: none;
+  animation: fadeInUp 0.5s ease;
+}
+.feedback-panel.show { display: block; }
+.feedback-panel.correct { border-color: var(--positive); background: rgba(16, 185, 129, 0.08); }
+.feedback-panel.incorrect { border-color: var(--negative); background: rgba(239, 68, 68, 0.08); }
+.feedback-verdict { font-size: 18px; font-weight: 900; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.feedback-verdict.correct { color: var(--positive); }
+.feedback-verdict.incorrect { color: var(--negative); }
+.feedback-section { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+.feedback-section-title { font-size: 12px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--bsu-gold-light); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.feedback-text { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+.feedback-text strong { color: var(--text-primary); font-weight: 700; }
+.next-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--bsu-navy), var(--bsu-navy-light));
+  color: white;
+  border: 2px solid var(--bsu-gold);
+  border-radius: 40px;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 56px;
+}
+.next-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 51, 102, 0.5); }
+.completion-panel {
+  background: linear-gradient(135deg, rgba(200, 164, 21, 0.1), rgba(16, 185, 129, 0.08));
+  border: 2px solid var(--bsu-gold);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  text-align: center;
+  display: none;
+  animation: fadeInUp 0.6s ease;
+  margin-bottom: 22px;
+}
+.completion-panel.show { display: block; }
+.completion-panel .trophy { font-size: 68px; display: block; margin-bottom: 12px; animation: bounceIn 0.8s ease; }
+@keyframes bounceIn {
+  0% { transform: scale(0) rotate(-180deg); }
+  60% { transform: scale(1.2) rotate(20deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.completion-panel h2 { font-size: 28px; font-weight: 900; margin-bottom: 8px; color: var(--text-primary); }
+.completion-panel p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; }
+.final-score-box {
+  display: inline-flex;
+  flex-direction: column;
+  background: var(--bg-card-solid);
+  border: 2px solid var(--bsu-gold);
+  border-radius: 16px;
+  padding: 16px 32px;
+  margin: 16px 0;
+}
+.final-score-box .score-label { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+.final-score-box .score-value { font-family: var(--font-mono); font-size: 36px; font-weight: 900; color: var(--signal-strong); }
+.badge-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 18px 0; }
+.badge-item {
+  background: rgba(200, 164, 21, 0.15);
+  border: 1px solid var(--bsu-gold);
+  color: var(--bsu-gold-light);
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.reflection-box { background: var(--bg-elevated); border-radius: 12px; padding: 16px 18px; margin: 16px 0; text-align: left; }
+.reflection-box h4 { font-size: 14px; font-weight: 800; color: var(--bsu-gold-light); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.reflection-box ul { list-style: none; padding: 0; }
+.reflection-box li { font-size: 13.5px; color: var(--text-secondary); padding: 4px 0 4px 22px; position: relative; line-height: 1.6; }
+.reflection-box li::before { content: '→'; position: absolute; left: 4px; color: var(--bsu-gold); font-weight: 800; }
+.completion-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+.btn-gold {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, var(--bsu-gold), var(--bsu-gold-dark));
+  color: var(--bsu-navy-dark);
+  border: none;
+  border-radius: 30px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition);
+  min-height: 48px;
+  box-shadow: 0 4px 14px rgba(200, 164, 21, 0.4);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200, 164, 21, 0.6); }
+.module-footer {
+  max-width: 950px;
+  margin: 40px auto 0;
+  padding: 28px 30px 24px;
+  background: var(--bsu-navy-dark);
+  border: 1px solid var(--border-gold);
+  border-top: 4px solid var(--bsu-gold);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.footer-university { font-size: 15px; font-weight: 800; color: var(--bsu-gold-light); }
+.footer-module { font-size: 13.5px; font-weight: 600; color: var(--text-secondary); }
+.footer-contact { font-size: 13px; color: var(--text-muted); }
+.footer-contact a { color: var(--bsu-gold-light); text-decoration: none; font-weight: 700; }
+.footer-contact a:hover { text-decoration: underline; }
+.footer-divider { width: 60px; height: 1px; background: rgba(200, 164, 21, 0.5); margin: 18px auto 14px; border: none; }
+.footer-tagline { font-size: 12.5px; color: var(--bsu-gold-light); font-weight: 700; letter-spacing: 0.5px; }
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+#confetti-canvas.active { opacity: 1; }
+@media (max-width: 640px) {
+  body { padding: 16px 10px 32px; }
+  .round-card { padding: 22px 18px; }
+  .status-bar { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 16px; }
+  .progress-dots { margin: 0; }
+  .decision-btn { min-height: 88px; padding: 14px 12px; }
+  .decision-btn .btn-icon { font-size: 24px; }
+  .decision-btn .btn-label { font-size: 13px; }
+  .completion-actions { flex-direction: column; }
+  .completion-actions .btn-gold { width: 100%; justify-content: center; }
+}
+@media print {
+  body { background: white !important; color: black; padding: 20px; }
+  body::before, .top-controls, .status-bar, #confetti-canvas, .decision-buttons, .next-btn, .completion-actions { display: none !important; }
+  .round-card, .intro-panel, .completion-panel, .module-footer {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  h1 { color: #003366 !important; -webkit-text-fill-color: #003366 !important; background: none !important; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="container">
+
+  <div class="top-controls">
+    <button class="top-btn" id="themeToggle" aria-label="Toggle theme">
+      <span id="themeIcon">🌙</span>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+
+  <header class="header">
+    <div class="module-badge">BMA4000-20 · Session 16 · The Business Environment</div>
+    <h1>PESTLE Market Entry Challenge 🌍</h1>
+    <p class="tagline">Ten markets. Six pillars. One question: do you have the judgement to know when to Enter, Investigate, or Do Not Enter?</p>
+  </header>
+
+  <div class="intro-panel">
+    <h2>📋 How This Works</h2>
+    <p>You'll face <strong>ten market scenarios</strong>, each with six PESTLE signals. Some are positive ✅, some negative ⚠️ — and each carries a <strong>strength</strong>: Strong, Moderate, or Weak.</p>
+    <p>Your task is not to count positives and negatives. It's to <strong>weigh</strong> them. A single strong negative can outweigh five weak positives. When the signals are genuinely mixed, the honest answer is <strong>Investigate Further</strong>.</p>
+    <p>Correct Enter/Do Not Enter → <strong>+£1,000</strong>. Correct Investigate → <strong>+£800</strong>. Wrong → <strong>−£500</strong>.</p>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot strong"></span> Strong signal</span>
+      <span class="legend-item"><span class="legend-dot moderate"></span> Moderate signal</span>
+      <span class="legend-item"><span class="legend-dot weak"></span> Weak signal</span>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-item">🎯 Round <strong id="roundCounter">1 / 10</strong></div>
+    <div class="progress-dots" id="progressDots"></div>
+    <div class="status-item">💷 Score: <strong id="scoreDisplay" class="score">£0</strong></div>
+    <div class="status-item">🔥 Streak: <strong id="streakDisplay">0</strong></div>
+  </div>
+
+  <div id="gameArea"></div>
+
+  <div class="completion-panel" id="completionPanel">
+    <span class="trophy">🏆</span>
+    <h2>Challenge Complete!</h2>
+    <p>You've analysed ten markets — from easy wins to genuinely ambiguous decisions. That is what real PESTLE analysis looks like.</p>
+    <div class="final-score-box">
+      <div class="score-label">Final Score</div>
+      <div class="score-value" id="finalScore">£0</div>
+    </div>
+    <div class="badge-list" id="badgeList"></div>
+    <div class="reflection-box">
+      <h4>🧠 Reflect on Your Decisions</h4>
+      <ul>
+        <li>Which rounds did you get wrong — and why?</li>
+        <li>Did you ever count positives and negatives instead of weighing them?</li>
+        <li>How often did you choose "Investigate Further"? Was it the right call?</li>
+        <li>Which round taught you the most — and how will you use it in your report?</li>
+      </ul>
+    </div>
+    <div class="reflection-box">
+      <h4>🔑 Key Takeaways</h4>
+      <ul>
+        <li><strong>Strength beats number</strong> — one strong signal can outweigh five weak ones.</li>
+        <li><strong>Counting is not analysis</strong> — weighing the evidence is the skill.</li>
+        <li><strong>"Investigate Further" is a real answer</strong> — uncertainty is not an excuse for a rushed decision.</li>
+        <li><strong>PESTLE factors interact</strong> — a positive in one pillar cannot cancel a strong negative in another.</li>
+        <li><strong>Wealth ≠ opportunity</strong> — a rich market with legal or cultural barriers can still fail.</li>
+      </ul>
+    </div>
+    <div class="completion-actions">
+      <button class="btn-gold" id="playAgainBtn">🔄 Play Again</button>
+    </div>
+  </div>
+
+</div>
+
+<footer class="module-footer">
+  <div class="footer-university">🏛️ Bath Spa University — Hackney</div>
+  <div class="footer-module">BMA4000-20 · The Business Environment</div>
+  <div class="footer-contact">Module Leader: Mohammed Hbubati · <a href="mailto:m.hbubati@bathspa.ac.uk">m.hbubati@bathspa.ac.uk</a></div>
+  <div class="footer-divider" aria-hidden="true"></div>
+  <div class="footer-tagline">🌱 Designed for Interactive & Sustainable Learning</div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  const ROUNDS = [
+    { title: 'A UK fashion retailer considering expansion into the UAE', context: 'A mid-size UK clothing brand is exploring its first Middle East market. The board needs a recommendation.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Stable monarchy, strong UK-UAE trade relations', positive: true, strength: 'strong' },
+        { pillar: 'Economic', icon: '💰', text: 'High GDP per capita and growing consumer spending', positive: true, strength: 'strong' },
+        { pillar: 'Social', icon: '👥', text: 'Large expat population familiar with Western brands', positive: true, strength: 'moderate' },
+        { pillar: 'Technological', icon: '💻', text: 'World-class logistics and digital infrastructure', positive: true, strength: 'strong' },
+        { pillar: 'Legal', icon: '⚖️', text: 'Clear foreign investment rules with 100% ownership allowed', positive: true, strength: 'moderate' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Hot climate limits outdoor retail footfall in summer', positive: false, strength: 'weak' }
+      ],
+      correctAnswer: 'Enter',
+      feedback: {
+        model: 'The evidence here is overwhelmingly positive. Strong political, economic, technological, and legal signals outweigh the single weak negative about summer footfall. A UK fashion brand could reach a high-spending expat market with well-established infrastructure — and enter through malls rather than high streets.',
+        changeMind: 'If the UAE introduced a sudden 30% tax on foreign retail profits, that would tip the balance away from Enter.',
+        commonMistake: 'Students sometimes hesitate because of the "hot climate" negative — but a weak, operational challenge is not a strategic reason to avoid a market.'
+      }
+    },
+    { title: 'A UK online retailer considering expansion into India', context: 'A UK e-commerce company is evaluating India as its next market. The board is excited — but cautious.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Stable democracy and strengthening UK-India trade ties', positive: true, strength: 'moderate' },
+        { pillar: 'Economic', icon: '💰', text: 'Fast-growing middle class and rising online spending', positive: true, strength: 'strong' },
+        { pillar: 'Social', icon: '👥', text: 'Young population and rapid smartphone adoption', positive: true, strength: 'strong' },
+        { pillar: 'Technological', icon: '💻', text: 'Mature digital payments (UPI) and delivery networks', positive: true, strength: 'strong' },
+        { pillar: 'Legal', icon: '⚖️', text: 'Complex federal-state regulations on e-commerce', positive: false, strength: 'moderate' },
+        { pillar: 'Environmental', icon: '🌱', text: 'High logistics emissions and unreliable power in some regions', positive: false, strength: 'moderate' }
+      ],
+      correctAnswer: 'Enter',
+      feedback: {
+        model: 'Four strong positives outweigh two moderate negatives. The Indian market has the population, spending power, and infrastructure a UK retailer needs. The regulatory complexity is real — but manageable with local partners. Enter, with a plan to navigate complexity.',
+        changeMind: 'If India introduced a new law requiring 51% local ownership (as it did for some sectors), the cost of entry might outweigh the opportunity.',
+        commonMistake: 'Students may see "complex regulations" and jump to Exit — but complexity is not the same as impossibility. Most international markets are complex.'
+      }
+    },
+    { title: 'A UK logistics firm considering expansion into Vietnam', context: 'A UK supply-chain company is evaluating Vietnam. The board is wary — but one factor may change everything.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'One-party state — but stable and pro-business', positive: true, strength: 'moderate' },
+        { pillar: 'Economic', icon: '💰', text: 'Fast GDP growth, though currency volatility is a concern', positive: true, strength: 'moderate' },
+        { pillar: 'Social', icon: '👥', text: 'Young, growing workforce — some skills gaps', positive: true, strength: 'weak' },
+        { pillar: 'Technological', icon: '💻', text: 'Ports are modernising but still reliant on paper systems', positive: false, strength: 'weak' },
+        { pillar: 'Legal', icon: '⚖️', text: 'New FDI reforms now allow 100% foreign ownership in logistics — a game-changer', positive: true, strength: 'strong' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Flood risk in some key coastal areas', positive: false, strength: 'weak' }
+      ],
+      correctAnswer: 'Enter',
+      feedback: {
+        model: 'This is the round where strength beats number. If you count, you see 4 positives and 2 negatives — which is mildly positive. But the \'strong positive\' in the legal factor — a new law allowing 100% foreign ownership in logistics — is a **game-changing signal**. It removes the single biggest barrier to entry. Enter.',
+        changeMind: 'If the FDI reform were delayed or reversed, the case would collapse. The strong signal is real — but fragile.',
+        commonMistake: 'Counting gives you a mild "yes". Weighing gives you a clear "yes". The difference is understanding which signal actually determines the market.'
+      }
+    },
+    { title: 'A UK agritech firm considering expansion into Argentina', context: 'A UK agricultural technology company is exploring Argentina. There are many positives on paper — but one signal is decisive.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Democratic and pro-trade — though recent policy shifts', positive: true, strength: 'moderate' },
+        { pillar: 'Economic', icon: '💰', text: 'Rich agricultural land and growing demand', positive: true, strength: 'moderate' },
+        { pillar: 'Social', icon: '👥', text: 'Skilled agri workforce — some regional migration', positive: true, strength: 'moderate' },
+        { pillar: 'Technological', icon: '💻', text: 'Improving broadband, though patchy in rural areas', positive: true, strength: 'weak' },
+        { pillar: 'Legal', icon: '⚖️', text: 'New capital controls freeze foreign profits in local currency for 2+ years — a deal-breaker', positive: false, strength: 'strong' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Some climate-related drought risk', positive: false, strength: 'moderate' }
+      ],
+      correctAnswer: 'Do Not Enter',
+      feedback: {
+        model: 'This is the mirror image of Round 3. If you count, you see 4 positives and 2 negatives — mildly positive. But the \'strong negative\' in the legal factor — capital controls that freeze foreign profits for 2+ years — is decisive. No UK business would accept that. Do Not Enter.',
+        changeMind: 'If Argentina removed its capital controls, the case would immediately become viable. Until then, the strong negative dominates.',
+        commonMistake: 'Counting says "go". Weighing says "stop". The legal barrier isn\'t one factor among six — it\'s the factor that makes the other five irrelevant.'
+      }
+    },
+    { title: 'A UK care home operator considering expansion into Nigeria', context: 'A UK care provider is exploring Nigeria, where demand for elderly care is growing. The board must decide.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Recent currency reform creates short-term instability', positive: false, strength: 'moderate' },
+        { pillar: 'Economic', icon: '💰', text: 'Low GDP per capita limits ability to pay for private care', positive: false, strength: 'strong' },
+        { pillar: 'Social', icon: '👥', text: 'Rising elderly population and shifting family structures', positive: true, strength: 'strong' },
+        { pillar: 'Technological', icon: '💻', text: 'Limited healthcare infrastructure and unreliable power', positive: false, strength: 'strong' },
+        { pillar: 'Legal', icon: '⚖️', text: 'Unclear regulatory framework for foreign-owned care homes', positive: false, strength: 'moderate' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Climate-related health pressures strain care systems', positive: false, strength: 'moderate' }
+      ],
+      correctAnswer: 'Do Not Enter',
+      feedback: {
+        model: 'This is a case where one strong positive — social demand — does not outweigh four negatives. The economics don\'t work: too few people can afford private care. The regulatory and infrastructure gaps are too large. Enter would be gambling.',
+        changeMind: 'If a UK charity partnered with a local foundation to subsidise care, and a regulatory pathway emerged, the picture could improve — but today, it is too risky.',
+        commonMistake: 'Students often over-weight the "social demand" positive and ignore the economic reality. Demand is worthless without purchasing power.'
+      }
+    },
+    { title: 'A UK mental health app considering expansion into South Africa', context: 'A UK digital mental health company is exploring South Africa. The signals are mixed — and cultural context is critical.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Stable democracy with strong UK ties', positive: true, strength: 'moderate' },
+        { pillar: 'Economic', icon: '💰', text: 'Growing middle class, but unequal access to private healthcare', positive: true, strength: 'weak' },
+        { pillar: 'Social', icon: '👥', text: 'Cultural stigma around mental health remains significant', positive: false, strength: 'strong' },
+        { pillar: 'Technological', icon: '💻', text: 'High smartphone penetration among urban youth', positive: true, strength: 'moderate' },
+        { pillar: 'Legal', icon: '⚖️', text: 'Medical device registration is complex but navigable', positive: false, strength: 'moderate' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Clinic access is limited in rural areas', positive: false, strength: 'weak' }
+      ],
+      correctAnswer: 'Investigate',
+      feedback: {
+        model: 'The economic and technological signals suggest a real market. But the social factor — cultural stigma around mental health — is strong and decisive. You cannot simply "enter" a market where the product\'s premise conflicts with cultural norms. Investigate Further: what specific subcultures or communities are already open to digital mental health? Is there a partner with existing trust?',
+        changeMind: 'If a successful UK-Indian mental health app had adapted to culturally similar barriers, that case could inform a faster decision. Without that evidence, investigating is the responsible move.',
+        commonMistake: 'Students assume digital products "transcend culture". They don\'t — especially in mental health, where stigma is the single biggest barrier to adoption.'
+      }
+    },
+    { title: 'A UK logistics firm considering expansion into Russia', context: 'A UK haulage company is being offered a partnership to distribute goods across Russia. The board must decide.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Heavy international sanctions and frozen diplomatic relations', positive: false, strength: 'strong' },
+        { pillar: 'Economic', icon: '💰', text: 'Rouble volatility and restricted access to banking', positive: false, strength: 'strong' },
+        { pillar: 'Social', icon: '👥', text: 'Growing informal consumer demand for foreign goods', positive: true, strength: 'moderate' },
+        { pillar: 'Technological', icon: '💻', text: 'Legacy infrastructure and limited digital tracking', positive: false, strength: 'moderate' },
+        { pillar: 'Legal', icon: '⚖️', text: 'UK law restricts trade with sanctioned entities', positive: false, strength: 'strong' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Weak environmental standards increase reputational risk', positive: false, strength: 'moderate' }
+      ],
+      correctAnswer: 'Do Not Enter',
+      feedback: {
+        model: 'This is a textbook case of "one moderate positive cannot redeem strong negatives". The sanctions, rouble instability, and UK legal restrictions are decisive. No UK board would accept the reputational and legal risk — even with consumer demand.',
+        changeMind: 'If international sanctions were fully lifted AND a stable banking arrangement was confirmed, the picture would change — but that is not the current reality.',
+        commonMistake: 'Students sometimes argue "there is demand, so why not?" — but demand without legal and political stability is worthless. Access trumps appetite.'
+      }
+    },
+    { title: 'A UK fitness app considering expansion into Saudi Arabia', context: 'A UK fitness technology company is considering Saudi Arabia. Many students assume "no" — but the evidence may surprise you.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Vision 2030 actively encourages digital health and fitness investment', positive: true, strength: 'strong' },
+        { pillar: 'Economic', icon: '💰', text: 'High disposable income and rising wellness spending', positive: true, strength: 'strong' },
+        { pillar: 'Social', icon: '👥', text: 'Women\'s fitness market has opened dramatically since 2018 reforms', positive: true, strength: 'strong' },
+        { pillar: 'Technological', icon: '💻', text: 'Near-universal smartphone and 5G adoption', positive: true, strength: 'strong' },
+        { pillar: 'Legal', icon: '⚖️', text: 'Content moderation rules require cultural adaptation of imagery', positive: false, strength: 'moderate' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Extreme heat limits outdoor activity for much of the year', positive: false, strength: 'weak' }
+      ],
+      correctAnswer: 'Enter',
+      feedback: {
+        model: 'This is a deliberate test of bias. Many students assume a market like Saudi Arabia is "off-limits" for a Western fitness app — but the evidence says otherwise. Vision 2030 is creating a genuinely new market, especially for women\'s fitness, with strong economic and technological tailwinds. The legal and environmental barriers are real but manageable. Enter — with cultural adaptation as a non-negotiable.',
+        changeMind: 'If content moderation rules tightened to require gender-segregated services, the business model would need a fundamental redesign before entry.',
+        commonMistake: 'The biggest mistake here is bias — assuming the market is unsuitable before looking at the evidence. This round proves PESTLE is strongest when it challenges your assumptions.'
+      }
+    },
+    { title: 'A UK fintech considering expansion into China', context: 'A UK digital banking company is evaluating mainland China. The opportunity is enormous — but so are the barriers.',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Strong UK-China trade ties — but recent political tensions', positive: true, strength: 'moderate' },
+        { pillar: 'Economic', icon: '💰', text: 'Massive consumer market and digital payments ecosystem', positive: true, strength: 'strong' },
+        { pillar: 'Social', icon: '👥', text: 'High digital adoption and appetite for fintech', positive: true, strength: 'strong' },
+        { pillar: 'Technological', icon: '💻', text: 'Advanced digital infrastructure and mobile-first culture', positive: true, strength: 'strong' },
+        { pillar: 'Legal', icon: '⚖️', text: 'Foreign fintechs require a Chinese joint venture and can be asked to share source code', positive: false, strength: 'strong' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Carbon reporting requirements are increasing', positive: false, strength: 'weak' }
+      ],
+      correctAnswer: 'Investigate',
+      feedback: {
+        model: 'The opportunity is huge — three strong positives. But the legal barrier is equally strong: a joint venture requirement and source code sharing would fundamentally compromise a fintech\'s IP. This is not a "yes or no" — it\'s a decision that requires investigating the actual terms the Chinese regulator would impose. Investigate Further.',
+        changeMind: 'If China launched a pilot allowing 100% foreign ownership of fintechs in a special economic zone, the analysis would shift sharply toward Enter.',
+        commonMistake: 'Students often focus on the size of the opportunity and ignore the legal terms. In fintech, the legal structure is the business model.'
+      }
+    },
+    { title: 'A UK health-tech startup considering expansion into Japan', context: 'A UK digital health company is exploring Japan — a rich market with an ageing population. But is it the right move now?',
+      signals: [
+        { pillar: 'Political', icon: '🏛️', text: 'Stable democracy and strong UK-Japan trade relationship', positive: true, strength: 'strong' },
+        { pillar: 'Economic', icon: '💰', text: 'High GDP per capita — but healthcare budgets are under pressure', positive: true, strength: 'moderate' },
+        { pillar: 'Social', icon: '👥', text: 'Ageing population — but strong cultural preference for face-to-face care', positive: false, strength: 'strong' },
+        { pillar: 'Technological', icon: '💻', text: 'World-class digital infrastructure', positive: true, strength: 'strong' },
+        { pillar: 'Legal', icon: '⚖️', text: 'Extremely strict medical device regulations and long approval times', positive: false, strength: 'strong' },
+        { pillar: 'Environmental', icon: '🌱', text: 'Strict environmental compliance requirements — costly but manageable', positive: false, strength: 'moderate' }
+      ],
+      correctAnswer: 'Investigate',
+      feedback: {
+        model: 'This is a genuinely mixed market — the classic synthesis round. Three strong positive signals (political, technological, economic) and three strong negatives (social, legal, environmental). There is no honest "yes or no" answer. A professional analyst would investigate further — specifically the regulatory pathway and clinical adoption rates — before committing.',
+        changeMind: 'If Japan launched a fast-track regulatory pathway for digital health (as it did in some pilot regions), the balance would shift toward Enter. If a UK competitor had recently failed in Japan, the balance would shift toward Exit.',
+        commonMistake: 'Students often feel pressure to "decide" — but in real business, the smartest decision is often to investigate. Do not confuse "not deciding yet" with "not deciding."'
+      }
+    }
+  ];
+
+  let currentRoundIndex = 0;
+  let score = 0;
+  let streak = 0;
+  let longestStreak = 0;
+  let decisions = [];
+  let badges = [];
+  let answered = false;
+
+  const gameArea = document.getElementById('gameArea');
+  const roundCounter = document.getElementById('roundCounter');
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  const streakDisplay = document.getElementById('streakDisplay');
+  const progressDots = document.getElementById('progressDots');
+  const completionPanel = document.getElementById('completionPanel');
+  const finalScore = document.getElementById('finalScore');
+  const badgeList = document.getElementById('badgeList');
+
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const themeLabel = document.getElementById('themeLabel');
+  const savedTheme = (() => { try { return localStorage.getItem('bma4000_s16_theme'); } catch(e) { return null; } })();
+  if (savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    themeIcon.textContent = '☀️';
+    themeLabel.textContent = 'Light';
+  }
+  themeToggle.addEventListener('click', () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      document.documentElement.removeAttribute('data-theme');
+      themeIcon.textContent = '🌙';
+      themeLabel.textContent = 'Dark';
+      try { localStorage.setItem('bma4000_s16_theme', 'dark'); } catch(e) {}
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeIcon.textContent = '☀️';
+      themeLabel.textContent = 'Light';
+      try { localStorage.setItem('bma4000_s16_theme', 'light'); } catch(e) {}
+    }
+  });
+
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let confettiActive = false;
+  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+  function launchConfetti() {
+    if (confettiActive) return;
+    confettiActive = true;
+    canvas.classList.add('active');
+    particles = [];
+    const colors = ['#003366', '#c8a415', '#10b981', '#1a4d80', '#e0be3a', '#ffffff'];
+    for (let i = 0; i < 140; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: -20 - Math.random() * canvas.height,
+        size: 6 + Math.random() * 6,
+        speedY: 2 + Math.random() * 3,
+        speedX: -1 + Math.random() * 2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rotationSpeed: -5 + Math.random() * 10,
+        shape: Math.random() > 0.5 ? 'circle' : 'square'
+      });
+    }
+    animateConfetti();
+    setTimeout(() => {
+      confettiActive = false;
+      canvas.classList.remove('active');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }, 5000);
+  }
+  function animateConfetti() {
+    if (!confettiActive) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.y += p.speedY; p.x += p.speedX; p.rotation += p.rotationSpeed;
+      if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation * Math.PI / 180);
+      ctx.fillStyle = p.color;
+      if (p.shape === 'circle') { ctx.beginPath(); ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2); ctx.fill(); }
+      else { ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size); }
+      ctx.restore();
+    });
+    requestAnimationFrame(animateConfetti);
+  }
+
+  function strengthLabel(s) {
+    if (s === 'strong') return 'Strong signal';
+    if (s === 'moderate') return 'Moderate signal';
+    return 'Weak signal';
+  }
+  function decisionLabel(d) {
+    if (d === 'Enter') return '✅ Enter Market';
+    if (d === 'Investigate') return '🔍 Investigate Further';
+    if (d === 'Do Not Enter') return '❌ Do Not Enter';
+    return d;
+  }
+
+  function renderProgressDots() {
+    progressDots.innerHTML = '';
+    for (let i = 0; i < ROUNDS.length; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'progress-dot';
+      if (i < decisions.length) {
+        const d = decisions[i];
+        if (d.correct) {
+          dot.classList.add(d.answer === 'Investigate' ? 'investigate' : 'correct');
+        } else {
+          dot.classList.add('incorrect');
+        }
+      }
+      if (i === currentRoundIndex) dot.classList.add('current');
+      progressDots.appendChild(dot);
+    }
+  }
+
+  function renderRound() {
+    if (currentRoundIndex >= ROUNDS.length) {
+      showCompletion();
+      return;
+    }
+
+    answered = false;
+    const round = ROUNDS[currentRoundIndex];
+    roundCounter.textContent = `${currentRoundIndex + 1} / ${ROUNDS.length}`;
+    scoreDisplay.textContent = `£${score.toLocaleString()}`;
+    streakDisplay.textContent = streak;
+    renderProgressDots();
+
+    let html = `
+      <div class="round-card">
+        <div class="round-header">
+          <div class="round-badge">Round ${currentRoundIndex + 1}</div>
+          <div class="round-title-wrap">
+            <div class="round-title">${round.title}</div>
+            <div class="round-context">${round.context}</div>
+          </div>
+        </div>
+        <div class="signal-grid">
+    `;
+
+    round.signals.forEach(s => {
+      const polarityClass = s.positive ? 'positive' : 'negative';
+      const icon = s.positive ? '✅' : '⚠️';
+      html += `
+        <div class="signal-card ${polarityClass}">
+          <div class="signal-icon">${icon}</div>
+          <div class="signal-body">
+            <div class="signal-pillar">${s.icon} ${s.pillar}</div>
+            <div class="signal-text">${s.text}</div>
+            <div class="signal-strength ${s.strength}">
+              <span class="dot"></span> ${strengthLabel(s.strength)}
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `
+        </div>
+        <div class="decision-title">Your decision:</div>
+        <div class="decision-buttons" id="decisionButtons">
+          <button class="decision-btn enter" data-decision="Enter">
+            <span class="btn-icon">✅</span>
+            <span class="btn-label">Enter Market</span>
+          </button>
+          <button class="decision-btn investigate" data-decision="Investigate">
+            <span class="btn-icon">🔍</span>
+            <span class="btn-label">Investigate Further</span>
+          </button>
+          <button class="decision-btn exit" data-decision="Do Not Enter">
+            <span class="btn-icon">❌</span>
+            <span class="btn-label">Do Not Enter</span>
+          </button>
+        </div>
+        <div class="feedback-panel" id="feedbackPanel"></div>
+      </div>
+    `;
+
+    gameArea.innerHTML = html;
+
+    document.querySelectorAll('.decision-btn').forEach(btn => {
+      btn.addEventListener('click', () => makeDecision(btn.dataset.decision, btn));
+    });
+  }
+
+  function makeDecision(choice, btn) {
+    if (answered) return;
+    answered = true;
+    const round = ROUNDS[currentRoundIndex];
+    const correct = round.correctAnswer === choice;
+    const isInvestigate = choice === 'Investigate';
+
+    let points = 0;
+    let verdictClass = 'incorrect';
+    let verdictText = '';
+
+    if (correct) {
+      points = isInvestigate ? 800 : 1000;
+      verdictClass = 'correct';
+      verdictText = isInvestigate
+        ? '🔍 Investigate Further — correct call on this round. +£800'
+        : '✅ Correct decision. +£1,000';
+      streak++;
+      if (streak > longestStreak) longestStreak = streak;
+    } else {
+      points = -500;
+      streak = 0;
+      verdictClass = 'incorrect';
+      verdictText = `❌ Not the best decision — ${decisionLabel(round.correctAnswer)} was stronger. −£500`;
+    }
+
+    score += points;
+    scoreDisplay.textContent = `£${score.toLocaleString()}`;
+    streakDisplay.textContent = streak;
+
+    document.querySelectorAll('.decision-btn').forEach(b => {
+      b.disabled = true;
+      if (b.dataset.decision === choice) b.classList.add('selected');
+    });
+
+    decisions.push({ round: currentRoundIndex + 1, correct, answer: choice });
+    renderProgressDots();
+
+    const panel = document.getElementById('feedbackPanel');
+    panel.className = `feedback-panel show ${verdictClass}`;
+    panel.innerHTML = `
+      <div class="feedback-verdict ${verdictClass}">${verdictText}</div>
+      <div class="feedback-section">
+        <div class="feedback-section-title">🎯 A model analyst's view</div>
+        <div class="feedback-text">${round.feedback.model}</div>
+      </div>
+      <div class="feedback-section">
+        <div class="feedback-section-title">🔄 What would change the analysis</div>
+        <div class="feedback-text">${round.feedback.changeMind}</div>
+      </div>
+      <div class="feedback-section">
+        <div class="feedback-section-title">⚠️ Common mistake</div>
+        <div class="feedback-text">${round.feedback.commonMistake}</div>
+      </div>
+      <button class="next-btn" id="nextBtn">
+        ${currentRoundIndex < ROUNDS.length - 1 ? '➡️ Next Round' : '🏁 See Final Results'}
+      </button>
+    `;
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      currentRoundIndex++;
+      renderRound();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    setTimeout(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 200);
+  }
+
+  function showCompletion() {
+    gameArea.innerHTML = '';
+    roundCounter.textContent = `${ROUNDS.length} / ${ROUNDS.length}`;
+    completionPanel.classList.add('show');
+    finalScore.textContent = `£${score.toLocaleString()}`;
+
+    const completed = decisions.length;
+    const correctCount = decisions.filter(d => d.correct).length;
+    const totalPossible = completed * 1000;
+    const accuracy = completed > 0 ? Math.round((score / totalPossible) * 100) : 0;
+
+    badges = [];
+    if (completed >= 10 && correctCount >= 9) badges.push({ icon: '🏆', label: 'Market Master — 9+/10 correct' });
+    else if (completed >= 10 && correctCount >= 7) badges.push({ icon: '🎯', label: 'Strategic Thinker — 7+/10 correct' });
+    else if (completed >= 5 && correctCount >= 5) badges.push({ icon: '🧠', label: 'Analytical Mind — 5+ correct' });
+    else if (correctCount >= 3) badges.push({ icon: '📊', label: 'PESTLE Practitioner — 3+ correct' });
+
+    if (longestStreak >= 4) badges.push({ icon: '🔥', label: `Streak Master — ${longestStreak} in a row` });
+    if (decisions.some(d => d.correct && d.answer === 'Investigate')) badges.push({ icon: '🔍', label: 'Investigator — chose "Investigate" wisely' });
+    if (accuracy >= 90) badges.push({ icon: '💎', label: 'Precision Analyst — 90%+ accuracy' });
+    if (badges.length === 0) badges.push({ icon: '📚', label: 'Keep Learning — try again and aim higher' });
+
+    badgeList.innerHTML = badges.map(b => `<div class="badge-item">${b.icon} ${b.label}</div>`).join('');
+    launchConfetti();
+    setTimeout(() => { completionPanel.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
+  }
+
+  document.getElementById('playAgainBtn').addEventListener('click', () => {
+    currentRoundIndex = 0;
+    score = 0;
+    streak = 0;
+    longestStreak = 0;
+    decisions = [];
+    badges = [];
+    answered = false;
+    completionPanel.classList.remove('show');
+    scoreDisplay.textContent = '£0';
+    streakDisplay.textContent = '0';
+    renderRound();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  renderRound();
+  console.log('✅ BMA4000-20 Session 16 — PESTLE Market Entry Challenge (milestones removed) loaded.');
+})();
+</script>
+</body>
+</html>
